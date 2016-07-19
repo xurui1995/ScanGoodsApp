@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#f0eff5" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal"
+        android:background="#FFFFFF">
+
+        <ImageView
+            android:layout_margin="10dp"
+            android:id="@+id/exit"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:src="@drawable/exit" />
+
+        <TextView
+            android:layout_weight="3"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:textSize="20sp"
+            android:text="@string/_note" />
+
+        <ImageView
+             android:layout_margin="10dp"
+            android:layout_width="0dp"
+            android:id="@+id/add"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:src="@drawable/image_add" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/note_Text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="20dp"
+        android:lineSpacingExtra="10dp"
+        android:text="@string/example_text"
+        android:textSize="20sp" />
+
+    <ExpandableListView
+        android:layout_marginTop="20dp"
+        android:id="@+id/expandable_Listview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+    </ExpandableListView>
+    
+    <Button android:id="@+id/submit"
+        android:background="@drawable/bt_background"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:textColor="#FFFFFF"
+        android:text="@string/submit"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="30dp"/>
+</LinearLayout>

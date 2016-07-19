@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
+
+    <SurfaceView
+        android:id="@+id/preview_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center" />
+
+    <com.zxing.view.ViewfinderView
+        android:id="@+id/viewfinder_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+   <RelativeLayout
+       android:id="@+id/relative_layout"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_gravity="center"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/scan_text"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:paddingBottom="10dp"
+            android:paddingTop="10dp"
+            android:textColor="@android:color/white"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            />
+    
+           <TextView
+            android:id="@+id/count_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="45dp"
+            android:layout_marginTop="20dp"
+            android:text="已录入0件商品"
+            android:textSize="20sp" />
+        
+		<ImageView
+		    
+		    android:id="@+id/back"
+		    android:layout_width="50dp"
+		    android:layout_height="50dp"
+		    android:layout_marginLeft="110dp"
+		    android:layout_above="@id/count_text"
+		    android:scaleType="centerInside"
+		    android:src="@drawable/back" />
+     
+		<ImageView
+		    
+		    android:id="@+id/light"
+		    android:layout_width="50dp"
+		    android:layout_height="50dp"
+		    android:layout_above="@id/count_text"
+		    android:layout_marginLeft="40dp"
+		   android:layout_toRightOf="@id/back"
+		    android:scaleType="centerInside"
+		    android:src="@drawable/light" />
+           
+          
+       
+        	
+    </RelativeLayout>
+
+</FrameLayout>
