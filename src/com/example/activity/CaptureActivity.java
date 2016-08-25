@@ -1,6 +1,8 @@
-package com.zxing.activity;
+package com.example.activity;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.Vector;
 
 import android.app.Activity;
@@ -25,18 +27,19 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.Data.TempData;
-import com.example.sortlistview.MainActivity;
-import com.example.sortlistview.NoteActivity;
-import com.example.sortlistview.R;
+import com.example.myscanapp.R;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.Result;
 import com.zxing.camera.CameraManager;
 import com.zxing.decoding.CaptureActivityHandler;
 import com.zxing.decoding.InactivityTimer;
 import com.zxing.view.ViewfinderView;
+
 /**
- * Initial the camera
- * @author Ryan.Tang
+ * 扫描界面
+ * 
+ * @author dell
+ * 
  */
 public class CaptureActivity extends Activity implements Callback {
 
@@ -54,51 +57,81 @@ public class CaptureActivity extends Activity implements Callback {
 	private TextView counttext;
 	private Intent intent;
 	private ImageView back;
+	private ImageView light;
+
 	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.capture);
+		initview();
+		if(TempData.prelist.isEmpty()){
+			getFromAssets("code.txt");
+		}
+
+	}
+
+    public void getFromAssets(String fileName){ 
+        try { 
+             InputStreamReader inputReader = new InputStreamReader( getResources().getAssets().open(fileName) ); 
+            BufferedReader bufReader = new BufferedReader(inputReader);
+            String line="";
+            while((line = bufReader.readLine()) != null)
+                TempData.prelist.add(line);
+            System.out.println(TempData.prelist);
+        } catch (Exception e) { 
+            e.printStackTrace(); 
+        }
+       
+}
+
+	public void initview() {
 		CameraManager.init(getApplication());
-		viewfinderView = (ViewfinderView) findViewById(R.id.viewfinder_view);		
-		scantext=(TextView) findViewById(R.id.scan_text);
-		counttext=(TextView) findViewById(R.id.count_text);	 
-		scantext.setText("正在为"+TempData.name+"出库");
-		 counttext.setText("已录入"+TempData.count+"商品");
-		 back=(ImageView) findViewById(R.id.back);
-		 back.setOnClickListener(new OnClickListener() {
-			
+		viewfinderView = (ViewfinderView) findViewById(R.id.viewfinder_view);
+		scantext = (TextView) findViewById(R.id.scan_text);
+		counttext = (TextView) findViewById(R.id.count_text);
+		scantext.setText("正在为" + TempData.name + "出库");
+		counttext.setText("已录入" + TempData.count + "商品");
+		light = (ImageView) findViewById(R.id.light);
+		light.setOnClickListener(new OnClickListener() {
+
 			@Override
 			public void onClick(View v) {
-				
+				CameraManager.get().flashHandler();
+
+			}
+		});
+		back = (ImageView) findViewById(R.id.back);
+		back.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+
 				onBackPressed();
 			}
 		});
 		hasSurface = false;
 		inactivityTimer = new InactivityTimer(this);
-		
-
 	}
-	
+
 	@Override
 	public void onBackPressed() {
-		if(TempData.count==0){
-			intent=new Intent(this,MainActivity.class);
-		}
-		else{
-		intent=new Intent(this,NoteActivity.class);
+		if (TempData.count == 0) {
+			intent = new Intent(this, MainActivity.class);
+		} else {
+			intent = new Intent(this, NoteActivity.class);
 		}
 		startActivity(intent);
 		finish();
 	};
-	
+
 	@SuppressWarnings("deprecation")
 	@Override
 	protected void onResume() {
 		super.onResume();
 		SurfaceView surfaceView = (SurfaceView) findViewById(R.id.preview_view);
 		SurfaceHolder surfaceHolder = surfaceView.getHolder();
-		
+
 		if (hasSurface) {
 			initCamera(surfaceHolder);
 		} else {
@@ -114,10 +147,10 @@ public class CaptureActivity extends Activity implements Callback {
 			playBeep = false;
 		}
 		initBeepSound();
-		vibrate = false;
-		
-		//quit the scan view
-		
+		vibrate = false;   //这里改为true，可以设置震动
+
+		// quit the scan view
+
 	}
 
 	@Override
@@ -135,74 +168,84 @@ public class CaptureActivity extends Activity implements Callback {
 		inactivityTimer.shutdown();
 		super.onDestroy();
 	}
+
 	/**
-	 * Handler scan result
+	 * 处理扫描结果
+	 * 
 	 * @param result
-	 * @param barcode
+	 * @param
 	 */
 	public void handleDecode(Result result, Bitmap barcode) {
 		inactivityTimer.onActivity();
 		playBeepSoundAndVibrate();
-		 String resultString = result.getText();
-		//FIXME
-		  if (resultString.equals("")) {
-			Toast.makeText(CaptureActivity.this, "扫码失败", Toast.LENGTH_SHORT).show();
+		String resultString = result.getText();
+		//判断编码前缀是否是规定的标识
+		Boolean legal=IsPrefixLegal(resultString);
+		// FIXME
+		if (resultString.equals("")) {
+			Toast.makeText(CaptureActivity.this, "扫码失败", Toast.LENGTH_SHORT)
+					.show();
+		} else if (!legal) {
+			AlertDialog resutlDialog = new AlertDialog.Builder(
+					CaptureActivity.this).create();
+			resutlDialog.setCanceledOnTouchOutside(false);
+			resutlDialog.setTitle("提示");
+			resutlDialog.setMessage("请勿扫描其他商品");
+			resutlDialog.setButton(AlertDialog.BUTTON_POSITIVE, "确定",
+					new DialogInterface.OnClickListener() {
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+
+							dialog.dismiss();
+
+							if (handler != null) // 实现连续扫描
+								handler.restartPreviewAndDecode();
+						}
+					});
+			resutlDialog.show();
 		}
-		  else if(resultString.length()<10){
-			  AlertDialog resutlDialog = new AlertDialog.Builder(CaptureActivity.this).create();
+		else {
+			if (TempData.templist.contains(resultString)) {
+				AlertDialog resutlDialog = new AlertDialog.Builder(
+						CaptureActivity.this).create();
 				resutlDialog.setCanceledOnTouchOutside(false);
-	            resutlDialog.setTitle("提示");
-	            resutlDialog.setMessage("请勿扫描其他商品");
-	            resutlDialog.setButton(AlertDialog.BUTTON_POSITIVE, "确定", new DialogInterface.OnClickListener() 
-	            {
-	                @Override
-	                public void onClick(DialogInterface dialog, int which) 
-	                {    
-	                	
-	                    dialog.dismiss();
-	           
-	                    if(handler!=null)     //实现连续扫描
-	         			   handler.restartPreviewAndDecode();               
-	                } 
-	            });    
-	            resutlDialog.show();
-		  }
-		  
-		  else {
-			if(TempData.templist.contains(resultString)){
-				AlertDialog resutlDialog = new AlertDialog.Builder(CaptureActivity.this).create();
-				resutlDialog.setCanceledOnTouchOutside(false);
-	            resutlDialog.setTitle("提示");
-	            resutlDialog.setMessage("该商品已被扫描过");
-	            resutlDialog.setButton(AlertDialog.BUTTON_POSITIVE, "确定", new DialogInterface.OnClickListener() 
-	            {
-	                @Override
-	                public void onClick(DialogInterface dialog, int which) 
-	                {    
-	                	
-	                    dialog.dismiss();
-	           
-	                    if(handler!=null)     //实现连续扫描
-	         			   handler.restartPreviewAndDecode();               
-	                } 
-	            });    
-	            resutlDialog.show();
-				
-				
-				
+				resutlDialog.setTitle("提示");
+				resutlDialog.setMessage("该商品已被扫描过");
+				resutlDialog.setButton(AlertDialog.BUTTON_POSITIVE, "确定",
+						new DialogInterface.OnClickListener() {
+							@Override
+							public void onClick(DialogInterface dialog,
+									int which) {
+
+								dialog.dismiss();
+
+								if (handler != null) // 实现连续扫描
+									handler.restartPreviewAndDecode();
+							}
+						});
+				resutlDialog.show();
+
+			} else {
+				intent = new Intent(CaptureActivity.this, NoteActivity.class);
+				intent.putExtra("sn", resultString);
+				TempData.add(resultString);
+				startActivity(intent);
+				finish();
 			}
-			else{
-			intent=new Intent(CaptureActivity.this,NoteActivity.class);
-			intent.putExtra("sn", resultString);
-			TempData.count++;
-			TempData.templist.add(resultString);
-			TempData.sort(resultString);
-			startActivity(intent);
-			finish();
-			}
-		}	
+		}
 	}
-	
+
+	private Boolean IsPrefixLegal(String resultString) {
+		
+		for(String pre : TempData.prelist){
+			if(resultString.startsWith(pre)){
+				return true;
+			}
+		}
+		
+		return false;
+	}
+
 	private void initCamera(SurfaceHolder surfaceHolder) {
 		try {
 			CameraManager.get().openDriver(surfaceHolder);

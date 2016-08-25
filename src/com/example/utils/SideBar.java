@@ -1,4 +1,6 @@
-package com.example.sortlistview;
+package com.example.utils;
+
+import com.example.myscanapp.R;
 
 import android.content.Context;
 import android.graphics.Canvas;
@@ -52,7 +54,7 @@ public class SideBar extends View {
 
 		for (int i = 0; i < b.length; i++) {
 			paint.setColor(Color.rgb(33, 65, 98));
-			// paint.setColor(Color.WHITE);
+			//paint.setColor(Color.WHITE);
 			paint.setTypeface(Typeface.DEFAULT_BOLD);
 			paint.setAntiAlias(true);
 			paint.setTextSize(40);

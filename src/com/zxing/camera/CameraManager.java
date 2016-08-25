@@ -23,6 +23,7 @@ import android.graphics.PixelFormat;
 import android.graphics.Point;
 import android.graphics.Rect;
 import android.hardware.Camera;
+import android.hardware.Camera.Parameters;
 import android.os.Build;
 import android.os.Handler;
 import android.util.Log;
@@ -42,7 +43,7 @@ public final class CameraManager {
   private static final int MIN_FRAME_WIDTH = 240;
   private static final int MIN_FRAME_HEIGHT = 240;
   private static final int MAX_FRAME_WIDTH = 480;
-  private static final int MAX_FRAME_HEIGHT = 360;
+  private static final int MAX_FRAME_HEIGHT = 480;
 
   private static CameraManager cameraManager;
 
@@ -222,7 +223,7 @@ public final class CameraManager {
       if (camera == null) {
         return null;
       }
-      int width = screenResolution.x * 3 / 4;
+      int width = screenResolution.x * 3/ 4;
       if (width < MIN_FRAME_WIDTH) {
         width = MIN_FRAME_WIDTH;
       } else if (width > MAX_FRAME_WIDTH) {
@@ -323,5 +324,25 @@ public final class CameraManager {
 	public Context getContext() {
 		return context;
 	}
+	public void flashHandler() {  
+        //camera.startPreview();  
+        Parameters parameters = camera.getParameters();  
+        // ≈–∂œ…¡π‚µ∆µ±«∞◊¥Ã¨ÅÌ–ﬁ∏ƒ
+        if (Parameters.FLASH_MODE_OFF.equals(parameters.getFlashMode())) {  
+            turnOn(parameters);  
+        } else if (Parameters.FLASH_MODE_TORCH.equals(parameters.getFlashMode())) {  
+            turnOff(parameters);  
+        }  
+    }    
+    //È_
+    private void turnOn(Parameters parameters) {  
+        parameters.setFlashMode(Parameters.FLASH_MODE_TORCH);  
+        camera.setParameters(parameters);  
+    }   
+    //ÍP
+    private void turnOff(Parameters parameters) {  
+        parameters.setFlashMode(Parameters.FLASH_MODE_OFF);  
+        camera.setParameters(parameters);  
+    }  
 
 }

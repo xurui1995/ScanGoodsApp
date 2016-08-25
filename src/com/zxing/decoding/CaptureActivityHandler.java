@@ -27,10 +27,10 @@ import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
 
-import com.example.sortlistview.R;
+import com.example.activity.CaptureActivity;
+import com.example.myscanapp.R;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.Result;
-import com.zxing.activity.CaptureActivity;
 import com.zxing.camera.CameraManager;
 import com.zxing.view.ViewfinderResultPointCallback;
 

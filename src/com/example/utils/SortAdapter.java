@@ -1,6 +1,8 @@
-package com.example.sortlistview;
+package com.example.utils;
 
 import java.util.List;
+
+import com.example.myscanapp.R;
 
 import android.annotation.SuppressLint;
 import android.content.Context;

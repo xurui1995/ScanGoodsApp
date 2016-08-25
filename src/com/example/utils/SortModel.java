@@ -1,4 +1,4 @@
-package com.example.sortlistview;
+package com.example.utils;
 
 public class SortModel {
 

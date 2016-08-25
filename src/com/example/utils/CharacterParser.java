@@ -4,7 +4,7 @@
  * @author	LuRuihui
  * @version	0.1
  */
-package com.example.sortlistview;
+package com.example.utils;
 
 /**
  * Javaºº×Ö×ª»»ÎªÆ´Òô

@@ -2,39 +2,37 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="#f0eff5" >
-
+    android:background="#f0eff5"
+    android:orientation="vertical" >
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:orientation="horizontal"
-        android:background="#FFFFFF">
+        android:background="#FFFFFF"
+        android:orientation="horizontal" >
 
         <ImageView
-            android:layout_margin="10dp"
             android:id="@+id/exit"
             android:layout_width="0dp"
-            android:layout_weight="1"
             android:layout_height="match_parent"
-            android:src="@drawable/exit" />
+            android:layout_margin="8dp"
+            android:layout_weight="1"
+            android:src="@drawable/image_selector1" />
 
         <TextView
-            android:layout_weight="3"
             android:layout_width="0dp"
             android:layout_height="match_parent"
+            android:layout_weight="3"
             android:gravity="center"
-            android:textSize="20sp"
-            android:text="@string/_note" />
+            android:text="@string/_note"
+            android:textSize="20sp" />
 
         <ImageView
-             android:layout_margin="10dp"
+            android:id="@+id/submit"
             android:layout_width="0dp"
-            android:id="@+id/add"
             android:layout_height="match_parent"
+            android:layout_margin="8dp"
             android:layout_weight="1"
-            android:src="@drawable/image_add" />
-
+            android:src="@drawable/image_selector2" />
     </LinearLayout>
 
     <TextView
@@ -47,20 +45,29 @@
         android:text="@string/example_text"
         android:textSize="20sp" />
 
-    <ExpandableListView
-        android:layout_marginTop="20dp"
-        android:id="@+id/expandable_Listview"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
-    </ExpandableListView>
-    
-    <Button android:id="@+id/submit"
-        android:background="@drawable/bt_background"
+    <Button
+        android:id="@+id/add"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="10dp"
-        android:textColor="#FFFFFF"
-        android:text="@string/submit"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="30dp"/>
+        android:layout_marginTop="20dp"
+        android:background="@drawable/bt_background"
+        android:padding="10dp"
+        android:text="@string/submit"
+        android:textColor="#FFFFFF" />
+	 <TextView
+        android:id="@+id/total_Text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:lineSpacingExtra="10dp"
+        android:textSize="20sp" />
+    <ExpandableListView
+        android:id="@+id/expandable_Listview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp" >
+    </ExpandableListView>
+
 </LinearLayout>

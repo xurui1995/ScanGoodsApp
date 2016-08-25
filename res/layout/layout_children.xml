@@ -8,6 +8,7 @@
     <TextView
          android:background="#C0C0C0"
         android:id="@+id/second_textview"
+        android:textSize="18sp"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:layout_gravity="center"

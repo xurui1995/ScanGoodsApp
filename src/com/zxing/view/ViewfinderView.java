@@ -26,10 +26,13 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Rect;
+import android.text.Layout.Alignment;
+import android.text.StaticLayout;
+import android.text.TextPaint;
 import android.util.AttributeSet;
 import android.view.View;
 
-import com.example.sortlistview.R;
+import com.example.myscanapp.R;
 import com.google.zxing.ResultPoint;
 import com.zxing.camera.CameraManager;
 
@@ -79,7 +82,7 @@ public final class ViewfinderView extends View {
     }
     int width = canvas.getWidth();
     int height = canvas.getHeight();
-
+    
     // Draw the exterior (i.e. outside the framing rect) darkened
     paint.setColor(resultBitmap != null ? resultColor : maskColor);
     canvas.drawRect(0, 0, width, frame.top, paint);
@@ -107,6 +110,17 @@ public final class ViewfinderView extends View {
       int middle = frame.height() / 2 + frame.top;
       canvas.drawRect(frame.left + 2, middle - 1, frame.right - 1, middle + 2, paint);
 
+      
+      
+      
+      TextPaint textPaint = new TextPaint();           
+      textPaint.setARGB(0xFF, 0xFF, 0xFF,0xFF);   //������ɫ
+      textPaint.setTextSize(40);
+      textPaint.setAntiAlias(true);  //���ÿ���ݣ������ּ����ģ��
+      StaticLayout layout = new StaticLayout(getResources().getString(R.string.scan_text),textPaint,
+                          frame.right-frame.left,Alignment.ALIGN_NORMAL,1.0F,0.0F,true);
+      canvas.translate(frame.left, (float) (frame.bottom +20)); //������ʼλ��
+      layout.draw(canvas);
       Collection<ResultPoint> currentPossible = possibleResultPoints;
       Collection<ResultPoint> currentLast = lastPossibleResultPoints;
       if (currentPossible.isEmpty()) {

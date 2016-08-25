@@ -1,4 +1,6 @@
-package com.example.sortlistview;
+package com.example.utils;
+
+import com.example.myscanapp.R;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;

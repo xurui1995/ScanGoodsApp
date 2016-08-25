@@ -6,6 +6,11 @@
     <string name="menu_settings">Settings</string>
     <string name="_note">出货清单</string>
     <string name="example_text">经销商\\n本次扫描结果</string>
-    <string name="submit">确认无误，提交</string>
+    <string name="submit">继续扫描</string>
+    <string name="scan_text">请将机身二维码对准扫描框</string>
+    <string name="yes">确定</string>
+    <string name="no">取消</string>
+    <string name="warning">警告</string>
+    <string name="content">结果尚未提交，是否放弃保存</string>
 
 </resources>

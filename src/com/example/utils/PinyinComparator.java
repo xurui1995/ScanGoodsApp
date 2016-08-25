@@ -1,10 +1,10 @@
-package com.example.sortlistview;
+package com.example.utils;
 
 import java.util.Comparator;
 
 /**
  * 
- * @author xiaanming
+ * @author
  *
  */
 public class PinyinComparator implements Comparator<SortModel> {
