@@ -12,4 +12,6 @@ jar包：volley，
 ![](http://i2.buimg.com/4851/57de04496afc3b9a.png)
 
       
-
+这是是提供测试的二维码
+Appale001
+![](https://sp0.baidu.com/5aU_bSa9KgQFm2e88IuM_a/micxp1.duapp.com/qr.php?value=Apple001)
