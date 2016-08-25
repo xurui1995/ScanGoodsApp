@@ -12,10 +12,16 @@ jar包：volley，
 ![](http://i2.buimg.com/4851/57de04496afc3b9a.png)
 
       
-## 这是是提供测试的二维码
+## 这里是提供测试的二维码
 * Appale001
 ![](http://i1.buimg.com/4851/aa84629635048e13.png)
 * Appale002
 ![](http://i1.buimg.com/4851/5ab2cbb71749fc9f.png)
-* Appale002
+* Appale003
 ![](http://i1.buimg.com/4851/aca6f2f86e7b370a.png)
+* Banana001
+![](http://i1.buimg.com/4851/27b0b9ef801a4d93.png)
+* Banana002
+![](http://i1.buimg.com/4851/dc09d947c11acd6e.png)
+* 无关二维码
+![](http://i1.buimg.com/4851/fb000ed527113aea.png)
