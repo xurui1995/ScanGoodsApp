@@ -7,7 +7,7 @@
 
 ![](http://ww1.sinaimg.cn/large/0060lm7Tgw1f77ft6nwtfg306e0bckjm.gif)
 ###删除  
-![](http://ww3.sinaimg.cn/large/0060lm7Tgw1f77fpzamarg306e0bc4qp.gif)  
+![](http://i1.buimg.com/567571/5e048350d39745ed.gif) 
 ###其他  
 ![](http://i1.buimg.com/567571/1a09458d3c31c717.gif) 
 
