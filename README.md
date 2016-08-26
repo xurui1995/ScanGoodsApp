@@ -1,5 +1,15 @@
 # ScanGoodsApp
-一个基于Zxing的物品扫码并可以分类统计的app
+一个基于Zxing的物品扫码并可以分类统计的app  
+###选择经销商  
+![](http://ww3.sinaimg.cn/large/0060lm7Tgw1f77fpzamarg306e0bc4qp.gif)  
+
+###扫码统计 
+
+![](http://ww3.sinaimg.cn/large/0060lm7Tgw1f77fpzamarg306e0bc4qp.gif)  
+###删除  
+![](http://ww3.sinaimg.cn/large/0060lm7Tgw1f77fpzamarg306e0bc4qp.gif)  
+###其他  
+![](http://ww3.sinaimg.cn/large/0060lm7Tgw1f77fpzamarg306e0bc4qp.gif)  
 
 ###jar包：
       volley，
