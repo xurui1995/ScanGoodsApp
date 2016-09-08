@@ -49,7 +49,7 @@ import com.example.utils.SortModel;
 import com.example.utils.SideBar.OnTouchingLetterChangedListener;
 
 /**
- * ¾­ÏúÉÌÑ¡Ôñ½çÃæ
+ * ç»é”€å•†é€‰æ‹©ç•Œé¢
  * 
  * @author dell
  * 
@@ -66,13 +66,13 @@ public class MainActivity extends Activity {
 	private RequestQueue mQueue;
 
 	/**
-	 * ºº×Ö×ª»»³ÉÆ´ÒôµÄÀà
+	 * æ±‰å­—è½¬æ¢æˆæ‹¼éŸ³çš„ç±»
 	 */
 	private CharacterParser characterParser;
 	private List<SortModel> SourceDateList;
 
 	/**
-	 * ¸ù¾İÆ´ÒôÀ´ÅÅÁĞListViewÀïÃæµÄÊı¾İÀà
+	 * æ ¹æ®æ‹¼éŸ³æ¥æ’åˆ—ListViewé‡Œé¢çš„æ•°æ®ç±»
 	 */
 	private PinyinComparator pinyinComparator;
 
@@ -81,7 +81,7 @@ public class MainActivity extends Activity {
 		public void handleMessage(Message msg) {
 			switch (msg.what) {
 			case 1:
-				// ÈôÍøÂçÁ¬½ÓÔò·¢ËÍÍøÂçÇëÇó£¬ÇëÇó¾­ÏúÉÌÃû
+				// è‹¥ç½‘ç»œè¿æ¥åˆ™å‘é€ç½‘ç»œè¯·æ±‚ï¼Œè¯·æ±‚ç»é”€å•†å
 				sendRequest();
 				break;
 			default:
@@ -100,7 +100,7 @@ public class MainActivity extends Activity {
 				R.anim.round_loading);
 		mQueue = Volley.newRequestQueue(this);
 
-		// ×¢²á¼àÌıÍøÂç×´Ì¬¸Ä±ä¹ã²¥½ÓÊÜÕß
+		// æ³¨å†Œç›‘å¬ç½‘ç»œçŠ¶æ€æ”¹å˜å¹¿æ’­æ¥å—è€…
 		IntentFilter intentFilter = new IntentFilter();
 		intentFilter.addAction("android.net.conn.CONNECTIVITY_CHANGE");
 		mReceive = new MReceiver(this);
@@ -108,7 +108,7 @@ public class MainActivity extends Activity {
 		
 	}
 
-	// Ë¢ĞÂĞıÅ¥³õÊ¼»¯
+	// åˆ·æ–°æ—‹é’®åˆå§‹åŒ–
 	private void initRefreshImage() {
 
 		refreshImageView = (ImageView) findViewById(R.id.refresh);
@@ -130,18 +130,18 @@ public class MainActivity extends Activity {
 	}
 
 	/**
-	 * ·¢ËÍÍøÂçÇëÇó(ÕâÀïÎÒÓÃÄ£ÄâÊı¾İÔ´,Ô­±¾·½·¨Îª×¢ÊÍ´úÂë)
+	 * å‘é€ç½‘ç»œè¯·æ±‚(è¿™é‡Œæˆ‘ç”¨æ¨¡æ‹Ÿæ•°æ®æº,åŸæœ¬æ–¹æ³•ä¸ºæ³¨é‡Šä»£ç )
 	 */
 	private void sendRequest(){
-		 String[] NAMES = new String[] { "ËÎ½­", "Â¬¿¡Òå", "ÎâÓÃ",
-			"¹«ËïÊ¤", "¹ØÊ¤", "ÁÖ³å", "ÇØÃ÷", "ºôÑÓ×Æ", "»¨ÈÙ", "²ñ½ø", "ÀîÓ¦", "ÖìÙÚ", "Â³ÖÇÉî",
-			"ÎäËÉ", "¶­Æ½", "ÕÅÇå", "ÑîÖ¾", "ĞìÄş", "Ë÷³¬", "´÷×Ú", "ÁõÌÆ", "ÀîåÓ", "Ê·½ø", "ÄÂºë",
-			"À×ºá", "Àî¿¡", "ÈîĞ¡¶ş", "ÕÅºá", "ÈîĞ¡Îå", " ÕÅË³", "ÈîĞ¡Æß", "ÑîĞÛ", "Ê¯Ğã", "½âÕä",
-			" ½â±¦", "ÑàÇà", "ÖìÎä", "»ÆĞÅ", "ËïÁ¢", "ĞûÔŞ", "ºÂË¼ÎÄ", "º«ÌÏ", "Åí«^", "µ¥Í¢«•",
-			"Îº¶¨¹ú", "ÏôÈÃ", "ÅáĞû", "Å·Åô", "µË·É", " ÑàË³", "ÑîÁÖ", "ÁèÕñ", "½¯¾´", "ÂÀ·½",
-			"¹ù Ê¢", "°²µÀÈ«", "»Ê¸¦¶Ë", "ÍõÓ¢", "ìèÈıÄï", "±«Ğñ", "·®Èğ", "¿×Ã÷", "¿×ÁÁ", "Ïî³ä",
-			"ÀîÙò", "½ğ´ó¼á", "Âí÷ë", "Í¯Íş", "Í¯ÃÍ", "ÃÏ¿µ", "ºî½¡", "³Â´ï", "Ñî´º", "Ö£ÌìÊÙ",
-			"ÌÕ×ÚÍú", "ËÎÇå", "ÀÖºÍ", "¹¨Íú", "¶¡µÃËï", "ÄÂ´º", "²ÜÕı", "ËÎÍò", "¶ÅÇ¨", "Ñ¦ÓÀ", "Ê©¶÷",
+		 String[] NAMES = new String[] { "å®‹æ±Ÿ", "å¢ä¿Šä¹‰", "å´ç”¨",
+			"å…¬å­™èƒœ", "å…³èƒœ", "æ—å†²", "ç§¦æ˜", "å‘¼å»¶ç¼", "èŠ±è£", "æŸ´è¿›", "æåº”", "æœ±ä»", "é²æ™ºæ·±",
+			"æ­¦æ¾", "è‘£å¹³", "å¼ æ¸…", "æ¨å¿—", "å¾å®", "ç´¢è¶…", "æˆ´å®—", "åˆ˜å”", "æé€µ", "å²è¿›", "ç©†å¼˜",
+			"é›·æ¨ª", "æä¿Š", "é˜®å°äºŒ", "å¼ æ¨ª", "é˜®å°äº”", "å¼ é¡º", "é˜®å°ä¸ƒ", "æ¨é›„", "çŸ³ç§€", "è§£ç",
+			"è§£å®", "ç‡•é’", "æœ±æ­¦", "é»„ä¿¡", "å­™ç«‹", "å®£èµ", "éƒæ€æ–‡", "éŸ©æ»”", "å½­ç˜", "å•å»·çª",
+			"é­å®šå›½", "è§è®©", "è£´å®£", "æ¬§é¹", "é‚“é£", "ç‡•é¡º", "æ¨æ—", "å‡ŒæŒ¯", "è’‹æ•¬", "å•æ–¹",
+			"éƒ­ ç››", "å®‰é“å…¨", "çš‡ç”«ç«¯", "ç‹è‹±", "æ‰ˆä¸‰å¨˜", "é²æ—­", "æ¨Šç‘", "å­”æ˜", "å­”äº®", "é¡¹å……",
+			"æè¡®", "é‡‘å¤§åš", "é©¬éºŸ", "ç«¥å¨", "ç«¥çŒ›", "å­Ÿåº·", "ä¾¯å¥", "é™ˆè¾¾", "æ¨æ˜¥", "éƒ‘å¤©å¯¿",
+			"é™¶å®—æ—º", "å®‹æ¸…", "ä¹å’Œ", "é¾šæ—º", "ä¸å¾—å­™", "ç©†æ˜¥", "æ›¹æ­£", "å®‹ä¸‡", "æœè¿", "è–›æ°¸", "æ–½æ©",
 			 };
 		 JSONArray array=new JSONArray();
 		for(int i=0;i<NAMES.length;i++){
@@ -168,7 +168,7 @@ public class MainActivity extends Activity {
 		StringRequest stringRequest = new StringRequest(url,
 				new Response.Listener<String>() {
 					@Override
-					// ³É¹¦ÏìÓ¦
+					// æˆåŠŸå“åº”
 					public void onResponse(String response) {
 
 						JsonUtils.parseJSONWithJSONObject(response);
@@ -179,10 +179,10 @@ public class MainActivity extends Activity {
 					}
 				}, new Response.ErrorListener() {
 					@Override
-					// ÏìÓ¦Ê§°Ü
+					// å“åº”å¤±è´¥
 					public void onErrorResponse(VolleyError error) {
 
-						Toast.makeText(MainActivity.this, "»ñÈ¡Êı¾İÊ§°Ü", 1).show();
+						Toast.makeText(MainActivity.this, "è·å–æ•°æ®å¤±è´¥", 1).show();
 						refreshImageView.setVisibility(View.VISIBLE);
 						refreshImageView.clearAnimation();
 					}
@@ -192,22 +192,22 @@ public class MainActivity extends Activity {
 	}*/
 
 	/**
-	 * ³õÊ¼»¯ÊÓÍ¼
+	 * åˆå§‹åŒ–è§†å›¾
 	 */
 	private void initViews() {
-		// ÊµÀı»¯ºº×Ö×ªÆ´ÒôÀà
+		// å®ä¾‹åŒ–æ±‰å­—è½¬æ‹¼éŸ³ç±»
 		characterParser = CharacterParser.getInstance();
 		pinyinComparator = new PinyinComparator();
 		sideBar = (SideBar) findViewById(R.id.sidrbar);
 		dialog = (TextView) findViewById(R.id.dialog);
 		sideBar.setTextView(dialog);
 
-		// ÉèÖÃÓÒ²à´¥Ãş¼àÌı
+		// è®¾ç½®å³ä¾§è§¦æ‘¸ç›‘å¬
 		sideBar.setOnTouchingLetterChangedListener(new OnTouchingLetterChangedListener() {
 
 			@Override
 			public void onTouchingLetterChanged(String s) {
-				// ¸Ã×ÖÄ¸Ê×´Î³öÏÖµÄÎ»ÖÃ
+				// è¯¥å­—æ¯é¦–æ¬¡å‡ºç°çš„ä½ç½®
 				int position = adapter.getPositionForSection(s.charAt(0));
 				if (position != -1) {
 					sortListView.setSelection(position);
@@ -217,15 +217,15 @@ public class MainActivity extends Activity {
 		});
 
 		sortListView = (ListView) findViewById(R.id.country_lvcountry);
-		// ÉèÖÃµã»÷ÊÂ¼ş
+		// è®¾ç½®ç‚¹å‡»äº‹ä»¶
 		sortListView.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
-				// ÕâÀïÒªÀûÓÃadapter.getItem(position)À´»ñÈ¡µ±Ç°positionËù¶ÔÓ¦µÄ¶ÔÏó
+				// è¿™é‡Œè¦åˆ©ç”¨adapter.getItem(position)æ¥è·å–å½“å‰positionæ‰€å¯¹åº”çš„å¯¹è±¡
 				String name = ((SortModel) adapter.getItem(position)).getName();
-				// ½«Ãû×Ö´æÔÚTempDataÀàÖĞ
+				// å°†åå­—å­˜åœ¨TempDataç±»ä¸­
 				TempData.name = name;
 				Intent intent = new Intent(MainActivity.this,
 						CaptureActivity.class);
@@ -233,26 +233,26 @@ public class MainActivity extends Activity {
 				finish();
 			}
 		});
-		// µÃµ½JsonUtilsÀïµÄ¾­ÏúÉÌÁĞ±íÊı¾İ×ª»»ÎªÊı×é
+		// å¾—åˆ°JsonUtilsé‡Œçš„ç»é”€å•†åˆ—è¡¨æ•°æ®è½¬æ¢ä¸ºæ•°ç»„
 		String[] arr = JsonUtils.list
 				.toArray(new String[JsonUtils.list.size()]);
-		// Êı×é×÷ÎªÊı¾İÔ´
+		// æ•°ç»„ä½œä¸ºæ•°æ®æº
 		SourceDateList = filledData(arr);
 
-		// ¸ù¾İa-z½øĞĞÅÅĞòÔ´Êı¾İ
+		// æ ¹æ®a-zè¿›è¡Œæ’åºæºæ•°æ®
 		Collections.sort(SourceDateList, pinyinComparator);
 		adapter = new SortAdapter(this, SourceDateList);
 		sortListView.setAdapter(adapter);
 
 		mClearEditText = (ClearEditText) findViewById(R.id.filter_edit);
 
-		// ¸ù¾İÊäÈë¿òÊäÈëÖµµÄ¸Ä±äÀ´¹ıÂËËÑË÷
+		// æ ¹æ®è¾“å…¥æ¡†è¾“å…¥å€¼çš„æ”¹å˜æ¥è¿‡æ»¤æœç´¢
 		mClearEditText.addTextChangedListener(new TextWatcher() {
 
 			@Override
 			public void onTextChanged(CharSequence s, int start, int before,
 					int count) {
-				// µ±ÊäÈë¿òÀïÃæµÄÖµÎª¿Õ£¬¸üĞÂÎªÔ­À´µÄÁĞ±í£¬·ñÔòÎª¹ıÂËÊı¾İÁĞ±í
+				// å½“è¾“å…¥æ¡†é‡Œé¢çš„å€¼ä¸ºç©ºï¼Œæ›´æ–°ä¸ºåŸæ¥çš„åˆ—è¡¨ï¼Œå¦åˆ™ä¸ºè¿‡æ»¤æ•°æ®åˆ—è¡¨
 				filterData(s.toString());
 			}
 
@@ -269,7 +269,7 @@ public class MainActivity extends Activity {
 	}
 
 	/**
-	 * ÎªListViewÌî³äÊı¾İ
+	 * ä¸ºListViewå¡«å……æ•°æ®
 	 * 
 	 * @param date
 	 * @return
@@ -281,10 +281,10 @@ public class MainActivity extends Activity {
 		for (int i = 0; i < date.length; i++) {
 			SortModel sortModel = new SortModel();
 			sortModel.setName(date[i]);
-			// ºº×Ö×ª»»³ÉÆ´Òô
+			// æ±‰å­—è½¬æ¢æˆæ‹¼éŸ³
 			String pinyin = characterParser.getSelling(date[i]);
 			String sortString = pinyin.substring(0, 1).toUpperCase();
-			// ÕıÔò±í´ïÊ½£¬ÅĞ¶ÏÊ××ÖÄ¸ÊÇ·ñÊÇÓ¢ÎÄ×ÖÄ¸
+			// æ­£åˆ™è¡¨è¾¾å¼ï¼Œåˆ¤æ–­é¦–å­—æ¯æ˜¯å¦æ˜¯è‹±æ–‡å­—æ¯
 			if (sortString.matches("[A-Z]")) {
 				sortModel.setSortLetters(sortString.toUpperCase());
 			} else {
@@ -298,7 +298,7 @@ public class MainActivity extends Activity {
 	}
 
 	/**
-	 * ¸ù¾İÊäÈë¿òÖĞµÄÖµÀ´¹ıÂËÊı¾İ²¢¸üĞÂListView
+	 * æ ¹æ®è¾“å…¥æ¡†ä¸­çš„å€¼æ¥è¿‡æ»¤æ•°æ®å¹¶æ›´æ–°ListView
 	 * 
 	 * @param filterStr
 	 */
@@ -318,7 +318,7 @@ public class MainActivity extends Activity {
 				}
 			}
 		}
-		// ¸ù¾İa-z½øĞĞÅÅĞò
+		// æ ¹æ®a-zè¿›è¡Œæ’åº
 		Collections.sort(filterDateList, pinyinComparator);
 		adapter.updateListView(filterDateList);
 	}
