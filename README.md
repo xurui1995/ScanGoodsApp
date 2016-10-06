@@ -23,11 +23,11 @@
 
       
 ## 这里是提供测试的二维码
-* Appale001  
+* Apple001  
 ![](http://i1.buimg.com/4851/aa84629635048e13.png)
-* Appale002  
+* Apple002  
 ![](http://i1.buimg.com/4851/5ab2cbb71749fc9f.png)
-* Appale003  
+* Apple003  
 ![](http://i1.buimg.com/4851/aca6f2f86e7b370a.png)
 * Banana001  
 ![](http://i1.buimg.com/4851/27b0b9ef801a4d93.png)
